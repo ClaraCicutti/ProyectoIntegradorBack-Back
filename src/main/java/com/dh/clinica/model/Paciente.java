@@ -20,8 +20,11 @@ public class Paciente {
     @Column
     private Date fechaIngreso;
 
-    @OneToOne (mappedBy = "domicilio", cascade = CascadeType.REMOVE)
-    @Column
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name= "odontologos_id")
+    private Odontologo odontologo;
+
+    @OneToOne (mappedBy = "paciente", cascade = CascadeType.ALL)
     private Domicilio domicilio;
 
     public Paciente() {

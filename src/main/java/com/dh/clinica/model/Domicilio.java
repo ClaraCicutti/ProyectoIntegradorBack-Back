@@ -19,8 +19,8 @@ public class Domicilio {
     @Column
     private String provincia;
 
+    @JoinColumn ( name = "pacientes_id", referencedColumnName = "id")
     @OneToOne (fetch = FetchType.LAZY)
-    @JoinColumn ( name = "paciente_id", referencedColumnName = "id")
     private Paciente paciente;
 
     public Domicilio() {
@@ -45,6 +45,10 @@ public class Domicilio {
     public String getProvincia() { return provincia; }
 
     public void setProvincia(String provincia) { this.provincia = provincia; }
+
+    public Paciente getPaciente() { return paciente; }
+
+    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
 
     @Override
     public String toString() {
