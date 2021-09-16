@@ -10,6 +10,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 
 @RestController
@@ -34,26 +36,23 @@ public class OdontologoController {
 //    ARREGLAR!!
     @GetMapping("/{id}")
     public ResponseEntity<Odontologo> buscar(@PathVariable Integer id) {
-        Odontologo odontologoBuscado = odontologoService.buscar(id).get();
-        System.out.println(odontologoBuscado);
-        if(odontologoBuscado != null){
-            System.out.println("ALSFALSFABJSFBAKJSBF@%##@@@@@@@@");
-            return ResponseEntity.ok().body(odontologoBuscado);
-        }else{
+        try {
+            Odontologo odontologoBuscado = odontologoService.buscar(id).get();
+            return ResponseEntity.ok(odontologoBuscado);
+        }catch (NoSuchElementException exception){
             return ResponseEntity.badRequest().body(null);
         }
-
     }
 
     @PutMapping()
     public ResponseEntity<Odontologo> actualizar(@RequestBody Odontologo odontologo) {
         ResponseEntity<Odontologo> response = null;
-
-        if (odontologo.getId() != null && odontologoService.buscar(odontologo.getId()).isPresent())
+        try{
+            odontologoService.buscar(odontologo.getId()).get();
             response = ResponseEntity.ok(odontologoService.actualizar(odontologo));
-        else
+        }catch (NoSuchElementException exception){
             response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
+        }
         return response;
     }
 //

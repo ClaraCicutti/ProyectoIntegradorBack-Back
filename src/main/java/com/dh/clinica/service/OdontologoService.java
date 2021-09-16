@@ -1,6 +1,6 @@
 package com.dh.clinica.service;
 
-import com.dh.clinica.repository.IDao;
+//import com.dh.clinica.repository.IDao;
 import com.dh.clinica.model.Odontologo;
 import com.dh.clinica.repository.OdontologoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class OdontologoService {
 
     public Odontologo save(Odontologo o){ return repository.save(o); }
 
-    public Optional<Odontologo> buscar(Integer id){ return Optional.of(repository.getById(id)); }
+    public Optional <Odontologo> buscar(Integer id){ return repository.findById(id); }
 
     public Odontologo actualizar(Odontologo odontologo){ return repository.save(odontologo); }
 

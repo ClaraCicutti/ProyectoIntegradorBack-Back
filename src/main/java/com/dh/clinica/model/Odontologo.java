@@ -16,6 +16,8 @@ public class Odontologo {
     @Column
     private Integer matricula;
 
+    public Odontologo(){}
+
     public Integer getId() {
         return id;
     }
