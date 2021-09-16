@@ -1,6 +1,5 @@
 package com.dh.clinica.controller;
 
-//import com.dh.clinica.repository.impl.OdontologoDaoH2;
 import com.dh.clinica.model.Odontologo;
 
 import com.dh.clinica.service.OdontologoService;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 
 @RestController
@@ -24,7 +22,7 @@ public class OdontologoController {
 
     @PostMapping()
     public ResponseEntity<Odontologo> registrarOdontologo(@RequestBody Odontologo odontologo) {
-        Odontologo odontologoGuardado = odontologoService.save(odontologo);
+        Odontologo odontologoGuardado = odontologoService.guardar(odontologo);
         if(odontologoGuardado != null){
             return ResponseEntity.ok(odontologoGuardado);
         }else{
@@ -32,8 +30,6 @@ public class OdontologoController {
         }
     }
 
-
-//    ARREGLAR!!
     @GetMapping("/{id}")
     public ResponseEntity<Odontologo> buscar(@PathVariable Integer id) {
         try {
@@ -55,25 +51,23 @@ public class OdontologoController {
         }
         return response;
     }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<String> eliminar(@PathVariable Integer id) {
-//        ResponseEntity<String> response = null;
-//
-//        if (odontologoService.buscar(id).isPresent()) {
-//            odontologoService.eliminar(id);
-//            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
-//        } else {
-//            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-//        }
-//
-//        return response;
-//    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> eliminar(@PathVariable Integer id) {
+        ResponseEntity<String> response = null;
+
+        if (odontologoService.buscar(id).isPresent()) {
+            odontologoService.eliminar(id);
+            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
+        } else {
+            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return response;
+    }
+
     @GetMapping
     public ResponseEntity<List<Odontologo>> buscarTodos(){
         return ResponseEntity.ok(odontologoService.buscarTodos());
     }
-
-
 
 }
