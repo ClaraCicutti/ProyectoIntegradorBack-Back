@@ -1,13 +1,14 @@
 package com.dh.clinica.service;
 
 import com.dh.clinica.model.Odontologo;
+import com.dh.clinica.model.Paciente;
 import com.dh.clinica.repository.OdontologoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 public class OdontologoService {
@@ -15,13 +16,25 @@ public class OdontologoService {
     @Autowired
     private OdontologoRepository repository;
 
-    public Odontologo guardar(Odontologo o){ return repository.save(o); }
+    public Odontologo guardar(Odontologo odontologo){ return repository.save(odontologo); }
 
-    public Optional <Odontologo> buscar(Integer id){ return repository.findById(id); }
+    public Odontologo buscar(Integer id){
+        try{
+            return repository.findById(id).get();
+        }catch(NoSuchElementException exception){
+            return null;
+        }
+    }
 
     public Odontologo actualizar(Odontologo odontologo){ return repository.save(odontologo); }
 
-    public void eliminar(Integer id){ repository.deleteById(id); }
+    public Boolean eliminar(Integer id) {
+        if (repository.existsById(id)){
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 
     public List<Odontologo> buscarTodos(){
         return repository.findAll();

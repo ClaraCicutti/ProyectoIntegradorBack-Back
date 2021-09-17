@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 public class PacienteService {
@@ -16,11 +16,23 @@ public class PacienteService {
 
     public Paciente guardar(Paciente paciente){ return repository.save(paciente); }
 
-    public Optional <Paciente> buscar(Integer id){ return repository.findById(id); }
+    public Paciente buscar(Integer id){
+        try{
+            return repository.findById(id).get();
+        }catch(NoSuchElementException exception){
+            return null;
+        }
+    }
 
     public Paciente actualizar(Paciente paciente){ return repository.save(paciente); }
 
-    public void eliminar(Integer id){ repository.deleteById(id); }
+    public Boolean eliminar(Integer id) {
+        if (repository.existsById(id)){
+            repository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 
     public List<Paciente> buscarTodos(){
         return repository.findAll();

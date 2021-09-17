@@ -29,11 +29,11 @@ public class PacienteController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Paciente> buscar(@PathVariable Integer id) {
-        try {
-            Paciente pacienteBuscado = pacienteService.buscar(id).get();
+    public ResponseEntity<Paciente> buscar(@PathVariable Integer id){
+        Paciente pacienteBuscado = pacienteService.buscar(id);
+        if (pacienteBuscado != null){
             return ResponseEntity.ok(pacienteBuscado);
-        }catch (NoSuchElementException exception){
+        }else {
             return ResponseEntity.badRequest().body(null);
         }
     }
@@ -41,26 +41,20 @@ public class PacienteController {
     @PutMapping()
     public ResponseEntity<Paciente> actualizar(@RequestBody Paciente paciente) {
         ResponseEntity<Paciente> response = null;
-        try{
-            pacienteService.buscar(paciente.getId()).get();
-            response = ResponseEntity.ok(pacienteService.actualizar(paciente));
-        }catch (NoSuchElementException exception){
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        Paciente pacienteEncontrado = pacienteService.buscar(paciente.getId());
+        if(pacienteEncontrado != null){
+            return ResponseEntity.ok(pacienteService.actualizar(paciente));
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return response;
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Integer id) {
-        ResponseEntity<String> response = null;
-
-        if (pacienteService.buscar(id).isPresent()) {
-            pacienteService.eliminar(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity eliminar(@PathVariable Integer id) {
+        if (pacienteService.eliminar(id)){
+            return ResponseEntity.ok("Paciente with id " + id + " was deleted");
         }
-        return response;
+        return ResponseEntity.badRequest().body("Paciente with id " + id + " doesn't exist");
     }
 
     @GetMapping

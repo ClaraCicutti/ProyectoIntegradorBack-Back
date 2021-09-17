@@ -19,8 +19,12 @@ public class Odontologo {
     @Column
     private Integer matricula;
 
-    @OneToMany(mappedBy = "odontologo", cascade = CascadeType.REMOVE)
-    private Set<Paciente> pacientes = new HashSet<>();
+//    @OneToMany(mappedBy = "odontologo", cascade = CascadeType.REMOVE)
+//    private Set<Paciente> pacientes = new HashSet<>();
+
+    //    //    Prueba con lo que estaba en playground
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private Paciente paciente;
 
     public Odontologo(){}
 

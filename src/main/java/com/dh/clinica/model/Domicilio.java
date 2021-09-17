@@ -8,7 +8,7 @@ public class Domicilio {
 
     @Id
     @SequenceGenerator(name = "domicilio_sequence", sequenceName= "domicilio_sequence")
-    @GeneratedValue (strategy= GenerationType.SEQUENCE, generator = "sequence_generator")
+    @GeneratedValue (strategy= GenerationType.SEQUENCE, generator = "domicilio_sequence")
     private Integer id;
     @Column
     private String calle;
@@ -19,9 +19,10 @@ public class Domicilio {
     @Column
     private String provincia;
 
-    @JoinColumn ( name = "pacientes_id", referencedColumnName = "id")
-    @OneToOne (fetch = FetchType.LAZY)
-    private Paciente paciente;
+////    FUNCIONA!
+//    @JoinColumn ( name = "pacientes_id", referencedColumnName = "id")
+//    @OneToOne (fetch = FetchType.LAZY)
+//    private Paciente paciente;
 
     public Domicilio() {
     }
@@ -46,9 +47,9 @@ public class Domicilio {
 
     public void setProvincia(String provincia) { this.provincia = provincia; }
 
-    public Paciente getPaciente() { return paciente; }
-
-    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
+//    public Paciente getPaciente() { return paciente; }
+//
+//    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
 
     @Override
     public String toString() {

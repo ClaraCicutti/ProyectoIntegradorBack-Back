@@ -2,6 +2,8 @@ package com.dh.clinica.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "pacientes")
@@ -9,7 +11,7 @@ public class Paciente {
 
     @Id
     @SequenceGenerator(name = "paciente_sequence", sequenceName= "paciente_sequence")
-    @GeneratedValue (strategy= GenerationType.SEQUENCE, generator = "sequence_generator")
+    @GeneratedValue (strategy= GenerationType.SEQUENCE, generator = "paciente_sequence")
     private Integer id;
     @Column
     private String nombre;
@@ -20,10 +22,11 @@ public class Paciente {
     @Column
     private Date fechaIngreso;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name= "odontologos_id")
-    private Odontologo odontologo;
+//    @ManyToOne(fetch=FetchType.LAZY)
+//    @JoinColumn(name= "odontologos_id")
+//    private Odontologo odontologo;
 
+////    FUNCIONA
     @OneToOne (mappedBy = "paciente", cascade = CascadeType.ALL)
     private Domicilio domicilio;
 
@@ -50,9 +53,9 @@ public class Paciente {
 
     public void setFechaIngreso(Date fechaIngreso) { this.fechaIngreso = fechaIngreso; }
 
-    public Domicilio getDomicilio() { return domicilio; }
-
-    public void setDomicilio(Domicilio domicilio) { this.domicilio = domicilio; }
+//    public Domicilio getDomicilio() { return domicilio; }
+//
+//    public void setDomicilio(Domicilio domicilio) { this.domicilio = domicilio; }
 
     @Override
     public String toString() {
@@ -61,8 +64,8 @@ public class Paciente {
                 ", nombre: " + nombre +
                 ", apellido: " + apellido +
                 ", dni: " + dni +
-                ", fechaIngreso: " + fechaIngreso +
-                ", domicilio: " + domicilio
+                ", fechaIngreso: " + fechaIngreso
+//                ", domicilio: " + domicilio
                 ;
     }
 }

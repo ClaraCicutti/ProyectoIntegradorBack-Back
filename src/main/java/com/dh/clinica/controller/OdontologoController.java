@@ -31,11 +31,11 @@ public class OdontologoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Odontologo> buscar(@PathVariable Integer id) {
-        try {
-            Odontologo odontologoBuscado = odontologoService.buscar(id).get();
+    public ResponseEntity<Odontologo> buscar(@PathVariable Integer id){
+        Odontologo odontologoBuscado = odontologoService.buscar(id);
+        if (odontologoBuscado != null){
             return ResponseEntity.ok(odontologoBuscado);
-        }catch (NoSuchElementException exception){
+        }else {
             return ResponseEntity.badRequest().body(null);
         }
     }
@@ -43,26 +43,20 @@ public class OdontologoController {
     @PutMapping()
     public ResponseEntity<Odontologo> actualizar(@RequestBody Odontologo odontologo) {
         ResponseEntity<Odontologo> response = null;
-        try{
-            odontologoService.buscar(odontologo.getId()).get();
-            response = ResponseEntity.ok(odontologoService.actualizar(odontologo));
-        }catch (NoSuchElementException exception){
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        Odontologo odontologoEncontrado = odontologoService.buscar(odontologo.getId());
+        if(odontologoEncontrado != null){
+            return ResponseEntity.ok(odontologoService.actualizar(odontologo));
+        }else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        return response;
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Integer id) {
-        ResponseEntity<String> response = null;
-
-        if (odontologoService.buscar(id).isPresent()) {
-            odontologoService.eliminar(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity eliminar(@PathVariable Integer id) {
+        if (odontologoService.eliminar(id)){
+            return ResponseEntity.ok("Odontologo with id " + id + " was deleted");
         }
-        return response;
+        return ResponseEntity.badRequest().body("Odontologo with id " + id + " doesn't exist");
     }
 
     @GetMapping
