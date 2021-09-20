@@ -1,24 +1,22 @@
 package com.dh.clinica.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "odontologos")
 public class Odontologo {
 
     @Id
-    @SequenceGenerator(name = "odontologo_sequence", sequenceName = "odontologo_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "odontologo_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
+    @Column(length = 50)
     private String nombre;
-    @Column
+    @Column(length = 50)
     private String apellido;
-    @Column
+    @Column(unique = true, length = 18)
     private Integer matricula;
 
+//    CORREGIR TODA ESTA PARTE!!
 //    @OneToMany(mappedBy = "odontologo", cascade = CascadeType.REMOVE)
 //    private Set<Paciente> pacientes = new HashSet<>();
 

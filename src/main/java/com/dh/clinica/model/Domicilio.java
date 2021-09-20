@@ -7,22 +7,12 @@ import javax.persistence.*;
 public class Domicilio {
 
     @Id
-    @SequenceGenerator(name = "domicilio_sequence", sequenceName= "domicilio_sequence")
-    @GeneratedValue (strategy= GenerationType.SEQUENCE, generator = "domicilio_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
     private String calle;
-    @Column
     private String numero;
-    @Column
     private String localidad;
-    @Column
     private String provincia;
-
-////    FUNCIONA!
-//    @JoinColumn ( name = "pacientes_id", referencedColumnName = "id")
-//    @OneToOne (fetch = FetchType.LAZY)
-//    private Paciente paciente;
 
     public Domicilio() {
     }
@@ -47,9 +37,6 @@ public class Domicilio {
 
     public void setProvincia(String provincia) { this.provincia = provincia; }
 
-//    public Paciente getPaciente() { return paciente; }
-//
-//    public void setPaciente(Paciente paciente) { this.paciente = paciente; }
 
     @Override
     public String toString() {

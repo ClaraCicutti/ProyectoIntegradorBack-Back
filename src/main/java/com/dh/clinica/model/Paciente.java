@@ -2,31 +2,22 @@ package com.dh.clinica.model;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "pacientes")
 public class Paciente {
 
     @Id
-    @SequenceGenerator(name = "paciente_sequence", sequenceName= "paciente_sequence")
-    @GeneratedValue (strategy= GenerationType.SEQUENCE, generator = "paciente_sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
+    @Column(length = 50)
     private String nombre;
-    @Column
+    @Column(length = 50)
     private String apellido;
-    @Column
+    @Column(unique = true, length = 12)
     private String dni;
-    @Column
     private Date fechaIngreso;
 
-//    @ManyToOne(fetch=FetchType.LAZY)
-//    @JoinColumn(name= "odontologos_id")
-//    private Odontologo odontologo;
-
-////    FUNCIONA
     @OneToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "domicilio_id", referencedColumnName = "id")
     private Domicilio domicilio;
