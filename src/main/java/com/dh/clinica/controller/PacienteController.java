@@ -1,6 +1,6 @@
 package com.dh.clinica.controller;
 
-import com.dh.clinica.model.Paciente;
+import com.dh.clinica.entity.Paciente;
 import com.dh.clinica.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/pacientes")

@@ -1,6 +1,6 @@
 package com.dh.clinica.service;
 
-import com.dh.clinica.model.Domicilio;
+import com.dh.clinica.entity.Domicilio;
 import com.dh.clinica.repository.DomicilioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,6 @@
 package com.dh.clinica.service;
 
-import com.dh.clinica.model.Odontologo;
-import com.dh.clinica.model.Paciente;
+import com.dh.clinica.entity.Odontologo;
 import com.dh.clinica.repository.OdontologoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

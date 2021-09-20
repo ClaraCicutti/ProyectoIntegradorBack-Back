@@ -1,6 +1,6 @@
 package com.dh.clinica.controller;
 
-import com.dh.clinica.model.Domicilio;
+import com.dh.clinica.entity.Domicilio;
 import com.dh.clinica.service.DomicilioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

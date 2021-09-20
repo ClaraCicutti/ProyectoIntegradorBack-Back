@@ -1,4 +1,4 @@
-package com.dh.clinica.model;
+package com.dh.clinica.entity;
 
 import javax.persistence.*;
 

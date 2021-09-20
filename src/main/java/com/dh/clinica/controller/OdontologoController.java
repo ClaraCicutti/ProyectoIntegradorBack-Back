@@ -1,6 +1,6 @@
 package com.dh.clinica.controller;
 
-import com.dh.clinica.model.Odontologo;
+import com.dh.clinica.entity.Odontologo;
 
 import com.dh.clinica.service.OdontologoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 
 @RestController
