@@ -27,7 +27,8 @@ public class Paciente {
 //    private Odontologo odontologo;
 
 ////    FUNCIONA
-    @OneToOne (mappedBy = "paciente", cascade = CascadeType.ALL)
+    @OneToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "domicilio_id", referencedColumnName = "id")
     private Domicilio domicilio;
 
     public Paciente() {
@@ -53,9 +54,9 @@ public class Paciente {
 
     public void setFechaIngreso(Date fechaIngreso) { this.fechaIngreso = fechaIngreso; }
 
-//    public Domicilio getDomicilio() { return domicilio; }
-//
-//    public void setDomicilio(Domicilio domicilio) { this.domicilio = domicilio; }
+    public Domicilio getDomicilio() { return domicilio; }
+
+    public void setDomicilio(Domicilio domicilio) { this.domicilio = domicilio; }
 
     @Override
     public String toString() {
@@ -64,8 +65,8 @@ public class Paciente {
                 ", nombre: " + nombre +
                 ", apellido: " + apellido +
                 ", dni: " + dni +
-                ", fechaIngreso: " + fechaIngreso
-//                ", domicilio: " + domicilio
+                ", fechaIngreso: " + fechaIngreso +
+                ", domicilio: " + domicilio
                 ;
     }
 }
