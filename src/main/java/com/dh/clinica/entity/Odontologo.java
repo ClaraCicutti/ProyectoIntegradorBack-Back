@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class Odontologo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "odontologo_sequence", sequenceName = "odontologo_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "odontologo_sequence")
     private Integer id;
     @Column(length = 50)
     private String nombre;

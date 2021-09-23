@@ -1,27 +1,23 @@
 package com.dh.clinica.service;
 
-import com.dh.clinica.entity.Odontologo;
-import com.dh.clinica.repository.OdontologoRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.dh.clinica.entity.Paciente;
+import com.dh.clinica.entity.Turno;
+import com.dh.clinica.repository.TurnoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
-public class OdontologoService {
+public class TurnoService {
 
     @Autowired
-    private OdontologoRepository repository;
+    private TurnoRepository repository;
 
-    @Autowired
-    ObjectMapper mapper;
+    public Turno guardar(Turno turno){ return repository.save(turno); }
 
-    public Odontologo guardar(Odontologo odontologo){ return repository.save(odontologo); }
-
-    public Odontologo buscar(Integer id){
+    public Turno buscar(Integer id){
         try{
             return repository.findById(id).get();
         }catch(NoSuchElementException exception){
@@ -29,7 +25,7 @@ public class OdontologoService {
         }
     }
 
-    public Odontologo actualizar(Odontologo odontologo){ return repository.save(odontologo); }
+    public Turno actualizar(Turno turno){ return repository.save(turno); }
 
     public Boolean eliminar(Integer id) {
         if (repository.existsById(id)){
@@ -39,7 +35,7 @@ public class OdontologoService {
         return false;
     }
 
-    public List<Odontologo> buscarTodos(){
+    public List<Turno> buscarTodos(){
         return repository.findAll();
     }
 }

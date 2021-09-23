@@ -8,7 +8,8 @@ import java.util.Date;
 public class Paciente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "paciente_sequence", sequenceName = "paciente_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "paciente_sequence")
     private Integer id;
     @Column(length = 50)
     private String nombre;
@@ -19,7 +20,7 @@ public class Paciente {
     private Date fechaIngreso;
 
     @OneToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "domicilio_id", referencedColumnName = "id")
+    @JoinColumn(name = "domicilio_id" /* , referencedColumnName = "id" */)
     private Domicilio domicilio;
 
     public Paciente() {
