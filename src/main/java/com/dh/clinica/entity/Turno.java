@@ -1,54 +1,40 @@
 package com.dh.clinica.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Getter @Setter
 @Table(name = "turnos")
+//@JsonIdentityInfo(
+//        generator = ObjectIdGenerators.PropertyGenerator.class,
+//        property = "id", scope = Turno.class)
 public class Turno {
 
     @Id
     @SequenceGenerator(name = "turno_sequence", sequenceName = "turno_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "turno_sequence")
     private Integer id;
+
     @ManyToOne
     @JoinColumn(name = "paciente_id")
+    @JsonIdentityReference(alwaysAsId = true)
     private Paciente paciente;
+
     @ManyToOne
     @JoinColumn(name = "odontologo_id")
+    @JsonIdentityReference(alwaysAsId = true)
     private Odontologo odontologo;
     private Date date;
 
     public Turno() {
     }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Paciente getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
-    }
-
-    public Odontologo getOdontologo() {
-        return odontologo;
-    }
-
-    public void setOdontologo(Odontologo odontologo) {
-        this.odontologo = odontologo;
-    }
-
-    public Date getDate() { return date; }
-
-    public void setDate(Date date) { this.date = date; }
 
     @Override
     public String toString() {

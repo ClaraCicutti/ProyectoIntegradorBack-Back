@@ -1,9 +1,18 @@
 package com.dh.clinica.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 
 @Entity
+@Getter @Setter
 @Table(name = "domicilios")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id", scope = Domicilio.class)
 public class Domicilio {
 
     @Id
@@ -15,36 +24,19 @@ public class Domicilio {
     private String localidad;
     private String provincia;
 
+    @OneToOne(mappedBy = "domicilio")
+    private Paciente paciente;
+
     public Domicilio() {
     }
 
-    public Integer getId() { return id; }
-
-    public String getCalle() { return calle; }
-
-    public void setCalle(String calle) { this.calle = calle; }
-
-    public String getNumero() { return numero; }
-
-    public void setNumero(String numero) { this.numero = numero; }
-
-    public String getLocalidad() { return localidad; }
-
-    public void setLocalidad(String localidad) { this.localidad = localidad; }
-
-    public String getProvincia() { return provincia; }
-
-    public void setProvincia(String provincia) { this.provincia = provincia; }
-
-
     @Override
     public String toString() {
-        return "Domicilio{" +
-                "id=" + id +
-                ", calle='" + calle + '\'' +
-                ", numero='" + numero + '\'' +
-                ", localidad='" + localidad + '\'' +
-                ", provincia='" + provincia + '\'' +
-                '}';
+        return "Domicilio " +
+                "id: " + id +
+                ", calle: " + calle +
+                ", numero: " + numero +
+                ", localidad: " + localidad +
+                ", provincia: " + provincia;
     }
 }
