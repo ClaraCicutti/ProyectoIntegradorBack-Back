@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -31,7 +32,8 @@ public class Turno {
     @JoinColumn(name = "odontologo_id")
     @JsonIdentityReference(alwaysAsId = true)
     private Odontologo odontologo;
-    private Date date;
+
+    private LocalDate date;
 
     public Turno() {
     }

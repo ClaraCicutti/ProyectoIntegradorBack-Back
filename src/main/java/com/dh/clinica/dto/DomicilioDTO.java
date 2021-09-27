@@ -17,12 +17,8 @@ public class DomicilioDTO implements Serializable {
     private String provincia;
     private String calle;
     private String numero;
+    private Paciente paciente;
 
-    public DomicilioDTO (Domicilio domicilio){
-        this.id= domicilio.getId();
-        this.calle= domicilio.getCalle();
-        this.numero= domicilio.getNumero();
-        this.localidad= domicilio.getLocalidad();
-        this.provincia= domicilio.getProvincia();
-    }
+    public DomicilioDTO (){
+   }
 }
